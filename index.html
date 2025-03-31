@@ -58,7 +58,7 @@
         <!-- Padres de la Novia -->
         <div class="familia">
             <img src="image/flor.jpg" alt="Decoración floral" class="icono">
-            <p class="nombres">Eufrosina Barela López <br>&<br> Francisco Javier Ramírez Reyes ✝</p>
+            <p class="nombres">Eufrosina Varela López <br>&<br> Francisco Javier Ramírez Reyes ✝</p>
             <p class="subtitulo">Papás de la Novia</p>
         </div>
 
@@ -238,138 +238,91 @@ document.addEventListener('DOMContentLoaded', function() {
         <button id="btnConfirmar">Confirmar Asistencia</button>
     </div>
 
+    <!-- Contenedor para los mensajes -->
     <div id="mensajes-container">
         <!-- Aquí aparecerán los mensajes -->
     </div>
+
+    <div id="error-mensaje" style="color: red; display: none;"></div> <!-- Mensaje de error -->
     <div class="decoracion"></div>
 </section>
 
-<script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 <script>
+    const apiUrl = "https://script.google.com/macros/s/AKfycbxSnM14p4lwOG1Jdf7Foefq9SaVMOLVV7k4arLaU0EO9Z4zC57xX3-SmRL5UWrlCSflQQ/exec"; 
+
     document.addEventListener('DOMContentLoaded', function() {
-        const btnConfirmar = document.getElementById('btnConfirmar');
-        const mensajeInput = document.getElementById('mensaje');
-        const mensajesContainer = document.getElementById('mensajes-container');
-    
-        const peer = new Peer(); // Crear una conexión P2P
-        let conn; 
-    
-        peer.on('open', (id) => {
-            console.log(`Tu ID de Peer: ${id}`);
-        });
-    
-        peer.on('connection', (connection) => {
-            conn = connection;
-            conn.on('data', (mensaje) => {
-                mostrarMensaje(mensaje);
-            });
-        });
-    
-        function mostrarMensaje(mensaje) {
-            const mensajeDiv = document.createElement('div');
-            mensajeDiv.className = 'mensaje-usuario';
-            mensajeDiv.innerHTML = `<p>${mensaje.texto}</p> <span class="fecha">${mensaje.fecha}</span>`;
-            mensajesContainer.appendChild(mensajeDiv);
-        }
-    
-        btnConfirmar.addEventListener('click', function() {
-            const mensaje = mensajeInput.value.trim();
+        cargarMensajes(); 
+
+        document.getElementById('btnConfirmar').addEventListener('click', function() {
+            const mensaje = document.getElementById('mensaje').value.trim();
             if (mensaje === '') {
-                alert('Por favor, escribe un mensaje antes de confirmar');
+                mostrarError('Por favor, escribe un mensaje antes de confirmar.');
                 return;
             }
-    
-            const fecha = new Date().toLocaleDateString('es-MX', { 
-                day: 'numeric', 
-                month: 'long', 
-                year: 'numeric' 
-            });
-    
-            const nuevoMensaje = { texto: mensaje, fecha };
-    
-            if (conn) {
-                conn.send(nuevoMensaje);
-            }
-    
-            mostrarMensaje(nuevoMensaje);
-            mensajeInput.value = '';
-        });
-    
-        function conectarConOtroPeer(idOtroPeer) {
-            conn = peer.connect(idOtroPeer);
-            conn.on('open', () => {
-                console.log(`Conectado con: ${idOtroPeer}`);
-            });
-    
-            conn.on('data', (mensaje) => {
-                mostrarMensaje(mensaje);
-            });
-        }
-    });
-    </script>
-    
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const btnConfirmar = document.getElementById('btnConfirmar');
-    const mensajeInput = document.getElementById('mensaje');
-    const mensajesContainer = document.getElementById('mensajes-container');
 
-    // Cargar mensajes almacenados en LocalStorage al cargar la página
+            const fechaISO = new Date().toISOString(); // Fecha en formato ISO
+
+            document.getElementById('btnConfirmar').disabled = true; 
+
+            fetch(apiUrl, {
+                method: 'POST',
+                mode: 'no-cors',  
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ texto: mensaje, fecha: fechaISO })
+            })
+            .then(() => {
+                agregarMensajeUI(mensaje, formatearFecha(fechaISO));
+                document.getElementById('mensaje').value = ''; // Limpiar el textarea
+            })
+            .catch(() => mostrarError('Error al enviar el mensaje. Inténtalo de nuevo.'))
+            .finally(() => document.getElementById('btnConfirmar').disabled = false);
+        });
+    }); 
+
     function cargarMensajes() {
-        const mensajesGuardados = JSON.parse(localStorage.getItem('mensajes')) || [];
-        mensajesContainer.innerHTML = ''; // Limpiar contenedor antes de renderizar
+        fetch(apiUrl)
+            .then(response => response.json()) // Asegurarnos de que la respuesta es JSON
+            .then(data => {
+                const mensajesContainer = document.getElementById('mensajes-container');
+                mensajesContainer.innerHTML = ''; 
 
-        mensajesGuardados.forEach(msg => {
-            const mensajeDiv = document.createElement('div');
-            mensajeDiv.className = 'mensaje-usuario';
-            mensajeDiv.innerHTML = `
-                <p>${msg.texto}</p>
-                <span class="fecha">${msg.fecha}</span>
-            `;
-            mensajesContainer.appendChild(mensajeDiv);
-        });
+                data.forEach(msg => {
+                    const fechaFormateada = formatearFecha(msg.fecha);
+                    agregarMensajeUI(msg.texto, fechaFormateada);
+                });
 
-        if (mensajesGuardados.length > 0) {
-            mensajesContainer.style.display = 'block';
-        }
+                // Hacer scroll automático hacia abajo al cargar mensajes
+                mensajesContainer.scrollTop = mensajesContainer.scrollHeight;
+            })
+            .catch(() => mostrarError('Error al cargar mensajes. Intenta más tarde.'));
     }
 
-    cargarMensajes(); // Llamar a la función al inicio
+    function agregarMensajeUI(mensaje, fecha) {
+        const mensajesContainer = document.getElementById('mensajes-container');
+        const mensajeDiv = document.createElement('div');
+        mensajeDiv.className = 'mensaje-usuario';
+        mensajeDiv.innerHTML = `<p>${mensaje}</p><span class="fecha">${fecha}</span>`;
+        mensajesContainer.appendChild(mensajeDiv);
 
-    btnConfirmar.addEventListener('click', function() {
-        const mensaje = mensajeInput.value.trim();
-        
-        if (mensaje === '') {
-            alert('Por favor, escribe un mensaje antes de confirmar');
-            return;
-        }
+        // Hacer scroll automático para mostrar el último mensaje
+        mensajesContainer.scrollTop = mensajesContainer.scrollHeight;
+    }
 
-        const fecha = new Date().toLocaleDateString('es-MX', { 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric' 
+    function formatearFecha(fechaISO) {
+        const fecha = new Date(fechaISO);
+        return fecha.toLocaleDateString('es-MX', {
+            day: 'numeric', month: 'long', year: 'numeric'
         });
+    }
 
-        const nuevoMensaje = { texto: mensaje, fecha };
-
-        // Obtener mensajes existentes y agregar el nuevo
-        const mensajesGuardados = JSON.parse(localStorage.getItem('mensajes')) || [];
-        mensajesGuardados.push(nuevoMensaje);
-        localStorage.setItem('mensajes', JSON.stringify(mensajesGuardados));
-
-        // Recargar mensajes en la página
-        cargarMensajes();
-
-        // Limpiar el textarea
-        mensajeInput.value = '';
-
-        // Desplazarse suavemente a los mensajes
-        setTimeout(() => {
-            mensajesContainer.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
-    });
-});
+    function mostrarError(mensaje) {
+        const errorDiv = document.getElementById('error-mensaje');
+        errorDiv.textContent = mensaje;
+        errorDiv.style.display = 'block';
+        setTimeout(() => errorDiv.style.display = 'none', 5000);
+    }
 </script>
+    
 
 
 <section class="confirmacion-container">
