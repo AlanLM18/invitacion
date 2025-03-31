@@ -56,6 +56,7 @@
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+@media (max-width: 576px) {
 
 /* Estilos generales */
 body {
@@ -66,6 +67,7 @@ body {
   background-color: var(--beige);
   line-height: 1.6;
   overflow-x: hidden;
+  font-size: 12px;
 }
 
 section {
@@ -105,13 +107,13 @@ h1, h2, h3 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: var(--dorado);
+  color: var(--dorado); /* Cambiado a dorado como en padres y padrinos */
   position: relative;
   overflow: hidden;
 }
 
 .inicio h1 {
-  font-size: 5rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
   font-family: 'Great Vibes', cursive;
   letter-spacing: 3px;
@@ -119,18 +121,18 @@ h1, h2, h3 {
   animation: fadeIn 1s both, pulse 3s infinite 1s;
   position: relative;
   z-index: 2;
-  color: var(--dorado);
+  color: var(--dorado); /* Color dorado para el título */
 }
 
 .inicio .fecha {
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   margin-bottom: 30px;
   letter-spacing: 5px;
   font-family: 'Playfair Display', serif;
   animation: fadeIn 1s 0.5s both;
   position: relative;
   z-index: 2;
-  color: var(--dorado-claro);
+  color: var(--dorado-claro); /* Color dorado claro para la fecha */
 }
 
 .inicio::before {
@@ -157,52 +159,12 @@ h1, h2, h3 {
   transform: scale(1.05);
 }
 
-/* Diseño Responsivo */
-@media (max-width: 768px) {
-  .inicio h1 {
-    font-size: 3rem;
-  }
-
-  .inicio .fecha {
-    font-size: 1.5rem;
-  }
-
-  .inicio audio {
-    margin-top: 20px;
-  }
-
-  section {
-    padding: 60px 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .inicio h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-
-  .inicio .fecha {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-
-  .inicio audio {
-    margin-top: 15px;
-  }
-
-  section {
-    padding: 50px 10px;
-  }
-}
-
 /* Sección de ubicaciones */
 .ubicaciones {
   background-color: var(--blanco);
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: 40px 20px;
 }
 
 .ubicaciones h2 {
@@ -237,8 +199,7 @@ h1, h2, h3 {
 }
 
 .tarjeta {
-  width: 100%;
-  max-width: 380px;
+  width: 380px;
   background-color: var(--blanco);
   border-radius: 10px;
   overflow: hidden;
@@ -345,254 +306,235 @@ h1, h2, h3 {
   left: 100%;
 }
 
-/* Media Queries para Responsividad */
-@media (max-width: 768px) {
-  .ubicaciones h2 {
-    font-size: 2.5rem;
-  }
-  .tarjetas {
-    flex-direction: column;
-    align-items: center;
-  }
-  .tarjeta {
-    width: 90%;
-  }
-}
-
-@media (max-width: 480px) {
-  .ubicaciones h2 {
-    font-size: 2rem;
-  }
-  .tarjeta {
-    width: 100%;
-  }
-  .tarjeta-content {
-    padding: 20px;
-  }
-  .tarjeta h3 {
-    font-size: 1.5rem;
-  }
-  .tarjeta p {
-    font-size: 1rem;
-  }
-  .boton-maps {
-    padding: 10px 25px;
-    font-size: 0.9rem;
-  }
-}
-/* Sección de ubicaciones */
-.ubicaciones {
-  background-color: var(--blanco);
+/* Sección Padres & Padrinos */
+#padres-padrinos {
+  background-color: var(--beige);
   text-align: center;
   position: relative;
-  overflow: hidden;
-  padding: 40px 20px;
+  padding: 100px 20px;
 }
 
-.ubicaciones h2 {
-  font-size: 3rem;
-  margin-bottom: 60px;
+#padres-padrinos .titulo {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
   color: var(--dorado);
-  position: relative;
-  display: inline-block;
+  font-family: 'Great Vibes', cursive;
   animation: fadeIn 1s both;
 }
 
-.ubicaciones h2::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
-  background-color: var(--dorado);
-  animation: zoomIn 0.8s both;
+#padres-padrinos {
+  background-color: var(--beige);
+  text-align: center;
+  position: relative;
+  padding: 100px 20px;
 }
 
-.tarjetas {
+.contenedor {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 50px;
   max-width: 1200px;
   margin: 0 auto;
-  perspective: 1000px;
 }
 
-.tarjeta {
-  width: 100%;
-  max-width: 380px;
+.familia, .padrinos {
+  width: 320px;
+  padding: 40px 30px;
   background-color: var(--blanco);
   border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transition: var(--transicion-lenta);
-  transform-style: preserve-3d;
   opacity: 0;
+  transform: translateY(30px);
   animation: fadeIn 0.8s forwards;
 }
 
-.tarjeta:nth-child(1) { animation-delay: 0.3s; }
-.tarjeta:nth-child(2) { animation-delay: 0.6s; }
+.familia:nth-child(1) { animation-delay: 0.4s; }
+.familia:nth-child(2) { animation-delay: 0.7s; }
+.padrinos { animation-delay: 1s; }
 
-.tarjeta:hover {
-  transform: translateY(-15px) rotateY(5deg);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+.familia:hover, .padrinos:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-.tarjeta img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  transition: var(--transicion-lenta);
-}
-
-.tarjeta:hover img {
-  transform: scale(1.1);
-}
-
-.tarjeta-content {
-  padding: 30px;
+/* Círculos centrados con animaciones mejoradas - VERSIÓN MODIFICADA */
+.icono {
+  width: 100px; /* Reducido de 150px */
+  height: 100px; /* Reducido de 150px */
+  margin: 0 auto 20px; /* Ajuste de margen */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blanco);
+  border: 2px solid var(--dorado-claro);
+  box-shadow: 0 4px 15px rgba(200, 169, 126, 0.15);
   position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  padding: 3px; /* Ajuste de padding */
+  animation: pulse 2s infinite;
 }
 
-.tarjeta h3 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  color: var(--gris-oscuro);
-  position: relative;
-  display: inline-block;
+@keyframes borderGlow {
+  0% { box-shadow: 0 0 0 0 rgba(200, 169, 126, 0.2); }
+  100% { box-shadow: 0 0 0 15px rgba(200, 169, 126, 0); }
 }
 
-.tarjeta h3::after {
+.icono::before {
   content: '';
   position: absolute;
-  bottom: -8px;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  animation: rotate 8s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); border-color: var(--dorado-claro); }
+  25% { border-color: rgba(200, 169, 126, 0.5); }
+  50% { border-color: var(--dorado-claro); }
+  75% { border-color: rgba(200, 169, 126, 0.5); }
+  100% { transform: rotate(360deg); border-color: var(--dorado-claro); }
+}
+
+/* IMÁGENES MODIFICADAS - NUEVOS ESTILOS */
+.icono img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  z-index: 1;
+}
+
+/* Para imágenes decorativas (flor/hoja) */
+.icono img[src*="flor.jpg"], 
+.icono img[src*="hoja.jpg"] {
+  object-fit: contain;
+  padding: 15px; /* Reducido de 20px */
+  width: 85%; /* Ajuste para mejor proporción */
+  height: 85%; /* Ajuste para mejor proporción */
+}
+
+.familia:hover .icono img, 
+.padrinos:hover .icono img {
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+
+/* Efecto hover adicional para iconos */
+.icono:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(200, 169, 126, 0.3);
+  border-color: var(--dorado);
+}
+
+.icono:hover::before {
+  opacity: 1;
+  animation-duration: 6s;
+}
+
+/* Brillo dorado al hacer hover */
+.icono::after {
+  content: '';
+  position: absolute;
+  top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, 
+              rgba(255, 215, 0, 0.1) 0%, 
+              transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.icono:hover::after {
+  opacity: 1;
+}
+
+/* Contenido de texto */
+.nombres {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: var(--gris-oscuro);
+  line-height: 1.8;
+  position: relative;
+  transition: var(--transicion);
+}
+
+.familia:hover .nombres, .padrinos:hover .nombres {
+  color: var(--dorado);
+}
+
+.nombres::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 50px;
   height: 2px;
   background-color: var(--dorado);
   transition: var(--transicion);
 }
 
-.tarjeta:hover h3::after {
-  width: 100%;
+.familia:hover .nombres::after, .padrinos:hover .nombres::after {
+  width: 80px;
+  background-color: var(--dorado-claro);
 }
 
-.tarjeta p {
-  margin-bottom: 15px;
-  color: #666;
-  font-size: 1.1rem;
-}
-
-.tarjeta i {
-  margin-right: 10px;
+.subtitulo {
+  font-size: 1rem;
   color: var(--dorado);
-  font-size: 1.2rem;
-}
-
-.boton-maps {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 30px;
-  background-color: var(--dorado);
-  color: var(--blanco);
-  text-decoration: none;
-  border-radius: 50px;
-  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 1px;
   transition: var(--transicion);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
 }
 
-.boton-maps::before {
+.familia:hover .subtitulo, .padrinos:hover .subtitulo {
+  letter-spacing: 2px;
+  color: var(--gris-oscuro);
+}
+
+/* Efecto de partículas decorativas */
+.familia::after, .padrinos::after {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: 0.5s;
-  z-index: -1;
+  background: radial-gradient(circle at center, transparent 0%, rgba(200, 169, 126, 0.05) 100%);
+  opacity: 0;
+  transition: var(--transicion-lenta);
 }
 
-.boton-maps:hover {
-  background-color: #b38e5a;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(200, 169, 126, 0.4);
+.familia:hover::after, .padrinos:hover::after {
+  opacity: 1;
 }
 
-.boton-maps:hover::before {
-  left: 100%;
+/* Estilos para centrar los íconos */
+.familia, .padrinos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-/* Media Queries para Responsividad */
-@media (max-width: 768px) {
-  .ubicaciones h2 {
-    font-size: 2.5rem;
-  }
-  .tarjetas {
-    flex-direction: column;
-    align-items: center;
-  }
-  .tarjeta {
-    width: 90%;
-  }
-}
-
-@media (max-width: 480px) {
-  .ubicaciones h2 {
-    font-size: 2rem;
-  }
-  .tarjeta {
-    width: 100%;
-  }
-  .tarjeta-content {
-    padding: 20px;
-  }
-  .tarjeta h3 {
-    font-size: 1.5rem;
-  }
-  .tarjeta p {
-    font-size: 1rem;
-  }
-  .boton-maps {
-    padding: 10px 25px;
-    font-size: 0.9rem;
-  }
-}
-
-/* Media Queries para Sección Padres & Padrinos */
-@media (max-width: 768px) {
-  #padres-padrinos .titulo {
-    font-size: 2.8rem;
-  }
-  .contenedor {
-    flex-direction: column;
-    align-items: center;
-  }
-  .familia, .padrinos {
-    width: 80%;
-  }
-}
-
-@media (max-width: 480px) {
-  #padres-padrinos .titulo {
-    font-size: 2.2rem;
-  }
-  .familia, .padrinos {
-    width: 100%;
-    padding: 30px 20px;
-  }
-  .nombres {
-    font-size: 1.2rem;
-  }
-  .subtitulo {
-    font-size: 0.9rem;
-  }
+.nombres, .subtitulo {
+  text-align: center;
+  width: 100%;
 }
 /* Sección Save the Date */
 .save-the-date {
@@ -606,7 +548,6 @@ h1, h2, h3 {
   color: var(--blanco);
   position: relative;
   overflow: hidden;
-  padding: 20px;
 }
 
 .save-the-date .titulo {
@@ -637,8 +578,6 @@ h1, h2, h3 {
   position: relative;
   z-index: 2;
   animation: fadeIn 1s 0.8s both;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .cuadro {
@@ -680,57 +619,6 @@ h1, h2, h3 {
   letter-spacing: 2px;
   margin-top: 5px;
   font-family: 'Playfair Display', serif;
-}
-
-@media (max-width: 768px) {
-  .save-the-date .titulo {
-    font-size: 3rem;
-  }
-  .save-the-date .frase {
-    font-size: 1.2rem;
-    max-width: 90%;
-  }
-  .contador {
-    gap: 15px;
-  }
-  .cuadro {
-    width: 100px;
-    height: 100px;
-  }
-  .cuadro div {
-    font-size: 2.5rem;
-  }
-  .cuadro span {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .save-the-date {
-    height: auto;
-    padding: 50px 20px;
-  }
-  .save-the-date .titulo {
-    font-size: 2.5rem;
-  }
-  .save-the-date .frase {
-    font-size: 1rem;
-  }
-  .contador {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  .cuadro {
-    width: 90px;
-    height: 90px;
-  }
-  .cuadro div {
-    font-size: 2rem;
-  }
-  .cuadro span {
-    font-size: 0.7rem;
-  }
 }
 
 /* Sección Itinerario - Versión mejorada */
@@ -833,6 +721,9 @@ h1, h2, h3 {
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   perspective: 1000px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 .evento.visible {
@@ -1238,7 +1129,6 @@ h1, h2, h3 {
   padding: 80px 20px;
   position: relative;
   overflow: hidden;
-  animation: fadeIn 1s both;
 }
 
 #dress-code .titulo {
@@ -1257,7 +1147,6 @@ h1, h2, h3 {
   letter-spacing: 1px;
   position: relative;
   display: inline-block;
-  animation: fadeIn 1s both;
 }
 
 .contenedor {
@@ -1268,7 +1157,6 @@ h1, h2, h3 {
   max-width: 1200px;
   margin: 0 auto;
   perspective: 1000px;
-  animation: fadeIn 1s both;
 }
 
 .card {
@@ -1282,7 +1170,7 @@ h1, h2, h3 {
   transition: all 0.5s ease;
   opacity: 0;
   transform: translateY(30px) rotateY(15deg);
-  animation: cardEntrance 0.8s forwards, fadeIn 1s both;
+  animation: cardEntrance 0.8s forwards;
 }
 
 .card:nth-child(1) { 
@@ -1328,31 +1216,32 @@ h1, h2, h3 {
 
 .texto {
   position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%) translateZ(30px);
-  width: 90%;
-  max-width: 380px;
+  bottom: 40px; /* Reducido para mejor balance */
+  left: 50%; /* Centrado horizontal */
+  transform: translateX(-50%) translateZ(30px); /* Centrado preciso */
+  width: 90%; /* Ancho controlado */
+  max-width: 380px; /* Máximo ancho para mejor lectura */
   padding: 20px;
   color: white;
   text-align: center;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3); /* Fondo sutil para mejor legibilidad */
   border-radius: 10px;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px); /* Efecto vidrio esmerilado */
   transition: all 0.5s ease;
 }
 
+
 .texto p {
   font-size: 1.1rem;
-  letter-spacing: 3px;
+  letter-spacing: 3px; /* Reducido para mejor legibilidad */
   margin-bottom: 15px;
-  text-transform: uppercase;
-  font-weight: 500;
+  text-transform: uppercase; /* Para consistencia con el diseño */
+  font-weight: 500; /* Más peso visual */
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   position: relative;
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 20px; /* Espacio para los decoradores */
 }
 
 .texto p::before,
@@ -1360,36 +1249,38 @@ h1, h2, h3 {
   content: "";
   position: absolute;
   top: 50%;
-  width: 20px;
+  width: 20px; /* Reducido para mejor proporción */
   height: 1px;
-  background-color: var(--dorado-claro);
+  background-color: var(--dorado-claro); /* Color dorado para coincidir con el tema */
 }
 
 .texto p::before {
-  left: -10px;
+  left: -10px; /* Ajustado al nuevo padding */
 }
 
 .texto p::after {
-  right: -10px;
+  right: -10px; /* Ajustado al nuevo padding */
 }
 
+
 .texto h3 {
-  font-size: 2.2rem;
+  font-size: 2.2rem; /* Reducido para mejor ajuste */
   letter-spacing: 2px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
   margin: 10px 0 0;
   font-weight: 400;
   transition: all 0.5s ease;
-  text-transform: uppercase;
+  text-transform: uppercase; /* Consistencia con el diseño */
 }
 
 .card:hover .texto {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); /* Fondo más oscuro al hover */
 }
 
 .card:hover .texto h3 {
-  letter-spacing: 3px;
+  letter-spacing: 3px; /* Menor incremento para mejor legibilidad */
 }
+
 
 .animacion {
   position: absolute;
@@ -1400,7 +1291,6 @@ h1, h2, h3 {
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
-  animation: fadeIn 1s both;
 }
 
 @keyframes cardEntrance {
@@ -1471,7 +1361,6 @@ h1, h2, h3 {
 
 .formulario {
   max-width: 600px;
-  width: 90%;
   margin: 0 auto;
   padding: 40px;
   background-color: rgba(255, 255, 255, 0.9);
@@ -1543,7 +1432,6 @@ h1, h2, h3 {
 
 #mensajes-container {
   max-width: 600px;
-  width: 90%;
   margin: 50px auto 0;
   display: none;
 }
@@ -1589,45 +1477,6 @@ h1, h2, h3 {
   font-size: 0.9rem;
   color: var(--dorado);
   font-family: 'Montserrat', sans-serif;
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-  .titulo {
-    font-size: 2.5rem;
-  }
-  .descripcion {
-    font-size: 1rem;
-  }
-  .formulario {
-    padding: 30px;
-  }
-  .formulario button {
-    padding: 12px 35px;
-    font-size: 1rem;
-  }
-  .mensaje-usuario p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .titulo {
-    font-size: 2rem;
-  }
-  .descripcion {
-    font-size: 0.9rem;
-  }
-  .formulario {
-    padding: 20px;
-  }
-  .formulario button {
-    padding: 10px 30px;
-    font-size: 0.9rem;
-  }
-  .mensaje-usuario p {
-    font-size: 0.9rem;
-  }
 }
 
 /* Animaciones */
@@ -1847,7 +1696,7 @@ h1, h2, h3 {
   }
   
   .formulario {
-    padding: 30px;
+    padding: 15px;
   }
 }
 
@@ -1861,7 +1710,7 @@ h1, h2, h3 {
   }
   
   .boton-whatsapp {
-    padding: 15px 30px;
+    padding: 10px 20px;
     font-size: 1rem;
   }
   
@@ -1879,4 +1728,36 @@ h1, h2, h3 {
 .evento.visible, .tarjeta.visible, .card.visible, 
 .familia.visible, .padrinos.visible {
   opacity: 1;
+}
+
+.formulario textarea {
+  height: 120px;
+}
+.contador .cuadro {
+  width: 70px;
+  height: 70px;
+}
+
+.contador .cuadro div {
+  font-size: 1.5rem;
+}
+
+.contador .cuadro span {
+  font-size: 0.7rem;
+}
+
+.titulo, .titulo-principal {
+  font-size: 2rem;
+}
+
+.tarjeta, .familia, .padrinos, .card {
+  width: 100%;
+  max-width: 350px;
+}
+.evento .tarjeta-evento {
+  width: 90%;
+  margin: 0 auto;
+}
+
+
 }
