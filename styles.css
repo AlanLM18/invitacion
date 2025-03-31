@@ -56,7 +56,6 @@
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
-@media (max-width: 576px) {
 
 /* Estilos generales */
 body {
@@ -67,7 +66,6 @@ body {
   background-color: var(--beige);
   line-height: 1.6;
   overflow-x: hidden;
-  font-size: 12px;
 }
 
 section {
@@ -113,7 +111,7 @@ h1, h2, h3 {
 }
 
 .inicio h1 {
-  font-size: 2.5rem;
+  font-size: 5rem;
   margin-bottom: 20px;
   font-family: 'Great Vibes', cursive;
   letter-spacing: 3px;
@@ -125,7 +123,7 @@ h1, h2, h3 {
 }
 
 .inicio .fecha {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   margin-bottom: 30px;
   letter-spacing: 5px;
   font-family: 'Playfair Display', serif;
@@ -721,9 +719,6 @@ h1, h2, h3 {
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   perspective: 1000px;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
 }
 
 .evento.visible {
@@ -1040,85 +1035,6 @@ h1, h2, h3 {
   to {
     width: 100px;
     opacity: 1;
-  }
-}
-
-/* Responsive mejorado */
-@media (max-width: 992px) {
-  .titulo-principal {
-    font-size: 3.5rem;
-    margin-bottom: 60px;
-  }
-  
-  .tarjeta-evento {
-    width: calc(50% - 60px);
-    padding: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  #itinerario-animado {
-    padding: 80px 20px;
-  }
-  
-  .linea-central {
-    left: 50px;
-  }
-  
-  .evento,
-  .evento.izquierda,
-  .evento.derecha {
-    justify-content: flex-start;
-  }
-  
-  .tarjeta-evento {
-    width: calc(100% - 90px);
-    margin-left: 90px;
-  }
-  
-  .evento::after {
-    left: 50px;
-  }
-  
-  .icono-animado {
-    margin-left: 0;
-  }
-  
-  .titulo-evento {
-    font-size: 1.8rem;
-  }
-  
-  .actividad {
-    font-size: 1.2rem;
-  }
-  
-  .hora,
-  .lugar {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .titulo-principal {
-    font-size: 2.8rem;
-  }
-  
-  .tarjeta-evento {
-    padding: 25px;
-    margin-left: 70px;
-    width: calc(100% - 70px);
-  }
-  
-  .evento::after {
-    width: 20px;
-    height: 20px;
-    left: 40px;
-  }
-  
-  .icono-animado {
-    width: 80px;
-    height: 80px;
-    margin: -60px auto 20px;
   }
 }
 
@@ -1599,126 +1515,6 @@ h1, h2, h3 {
   right: -20px;
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-  .inicio h1, .save-the-date .titulo {
-    font-size: 4rem;
-  }
-  
-  .ubicaciones h2, #padres-padrinos .titulo, 
-  #itinerario .titulo, #dress-code .titulo,
-  #confirmacion .titulo {
-    font-size: 2.8rem;
-  }
-  
-  .evento h3 {
-    font-size: 1.6rem;
-  }
-  
-  .card {
-    width: 380px;
-    height: 500px;
-  }
-}
-
-@media (max-width: 768px) {
-  section {
-    padding: 80px 20px;
-  }
-  
-  .inicio h1, .save-the-date .titulo {
-    font-size: 3rem;
-  }
-  
-  .inicio .fecha, .save-the-date .frase {
-    font-size: 1.2rem;
-  }
-  
-  .ubicaciones h2, #padres-padrinos .titulo, 
-  #itinerario .titulo, #dress-code .titulo,
-  #confirmacion .titulo {
-    font-size: 2.2rem;
-  }
-  
-  .tarjetas, .contenedor {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .tarjeta, .familia, .padrinos, .card {
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .timeline::after {
-    left: 40px;
-  }
-  
-  .evento {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 50px;
-  }
-  
-  .evento:nth-child(even) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .texto, .evento:nth-child(even) .texto {
-    width: calc(100% - 140px);
-    margin-left: 120px;
-    margin-top: 20px;
-    text-align: left;
-  }
-  
-  .texto::after, .evento:nth-child(even) .texto::after {
-    left: -10px;
-    right: auto;
-    top: -10px;
-  }
-  
-  .icono {
-    margin-bottom: 20px;
-  }
-  
-  .cuadro {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .cuadro div {
-    font-size: 2rem;
-  }
-  
-  .cuadro span {
-    font-size: 0.7rem;
-  }
-  
-  .formulario {
-    padding: 15px;
-  }
-}
-
-@media (max-width: 576px) {
-  .inicio h1, .save-the-date .titulo {
-    font-size: 2.5rem;
-  }
-  
-  .confirmacion-container .titulo {
-    font-size: 2rem;
-  }
-  
-  .boton-whatsapp {
-    padding: 10px 20px;
-    font-size: 1rem;
-  }
-  
-  .texto, .evento:nth-child(even) .texto {
-    width: calc(100% - 100px);
-    margin-left: 80px;
-  }
-}
 
 /* Animaciones al hacer scroll */
 .evento, .tarjeta, .card, .familia, .padrinos {
@@ -1730,34 +1526,300 @@ h1, h2, h3 {
   opacity: 1;
 }
 
-.formulario textarea {
-  height: 120px;
-}
-.contador .cuadro {
-  width: 70px;
-  height: 70px;
-}
-
-.contador .cuadro div {
-  font-size: 1.5rem;
+/* Media Queries para Responsividad */
+@media (max-width: 1200px) {
+  .tarjeta-evento {
+    width: calc(50% - 60px);
+    padding: 30px;
+  }
 }
 
-.contador .cuadro span {
-  font-size: 0.7rem;
+@media (max-width: 992px) {
+  section {
+    padding: 80px 20px;
+  }
+  
+  .inicio h1 {
+    font-size: 4rem;
+  }
+  
+  .titulo-principal {
+    font-size: 3.5rem;
+  }
+  
+  .contador {
+    gap: 15px;
+  }
+  
+  .cuadro {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .cuadro div {
+    font-size: 2.5rem;
+  }
 }
 
-.titulo, .titulo-principal {
-  font-size: 2rem;
+/* Tablets y móviles grandes */
+@media (max-width: 768px) {
+  .inicio h1 {
+    font-size: 3.5rem;
+  }
+  
+  .inicio .fecha {
+    font-size: 1.5rem;
+  }
+  
+  .tarjetas {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tarjeta {
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  /* Línea de tiempo para móviles */
+  .linea-central {
+    left: 40px;
+  }
+  
+  .evento {
+    margin-bottom: 80px;
+  }
+  
+  .evento.izquierda, 
+  .evento.derecha {
+    justify-content: flex-start;
+  }
+  
+  .tarjeta-evento {
+    width: calc(100% - 100px);
+    margin-left: 60px;
+  }
+  
+  .evento::after {
+    left: 40px;
+  }
+  
+  /* Dress code */
+  .card {
+    width: 90%;
+    height: 500px;
+  }
+  
+  /* Padrinos y familia */
+  .contenedor {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .familia, .padrinos {
+    width: 90%;
+  }
 }
 
-.tarjeta, .familia, .padrinos, .card {
-  width: 100%;
-  max-width: 350px;
-}
-.evento .tarjeta-evento {
-  width: 90%;
-  margin: 0 auto;
+/* Teléfonos móviles */
+@media (max-width: 576px) {
+  .inicio h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+  }
+  
+  .inicio .fecha {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+  }
+  
+  .ubicaciones h2,
+  #dress-code .titulo,
+  #padres-padrinos .titulo,
+  .titulo-principal,
+  .titulo {
+    font-size: 2.5rem;
+  }
+  
+  section {
+    padding: 60px 15px;
+  }
+  
+  /* Contador */
+  .contador {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .cuadro {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+  }
+  
+  .cuadro div {
+    font-size: 2rem;
+  }
+  
+  .cuadro span {
+    font-size: 0.7rem;
+  }
+  
+  /* Formulario */
+  .formulario {
+    padding: 30px 20px;
+  }
+  
+  /* Botones */
+  .boton-maps,
+  .formulario button,
+  .boton-whatsapp {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+  
+  /* Textos generales */
+  p {
+    font-size: 1rem;
+  }
+  
+  /* Iconos */
+  .icono {
+    width: 80px;
+    height: 80px;
+  }
+  
+  /* Animaciones en móviles */
+  .inicio audio:hover {
+    transform: none;
+  }
+  
+  .tarjeta:hover {
+    transform: none;
+  }
+  
+  .tarjeta:hover img {
+    transform: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  .card:hover img {
+    transform: none;
+  }
 }
 
+/* Pequeños móviles */
+@media (max-width: 400px) {
+  .inicio h1 {
+    font-size: 2.2rem;
+  }
+  
+  .inicio .fecha {
+    font-size: 1rem;
+  }
+  
+  .ubicaciones h2,
+  #dress-code .titulo,
+  #padres-padrinos .titulo,
+  .titulo-principal,
+  .titulo {
+    font-size: 2rem;
+  }
+  
+  .tarjeta-evento {
+    padding: 25px 15px;
+  }
+  
+  .titulo-evento {
+    font-size: 1.5rem;
+  }
+  
+  .actividad {
+    font-size: 1.1rem;
+  }
+  
+  .hora {
+    font-size: 1rem;
+  }
+  
+  .lugar {
+    font-size: 0.9rem;
+  }
+  
+  /* Ajustes para el contador */
+  .cuadro {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .cuadro div {
+    font-size: 1.8rem;
+  }
+  
+  /* Dress code cards */
+  .card {
+    height: 400px;
+  }
+  
+  .texto h3 {
+    font-size: 1.8rem;
+  }
+  
+  .texto p {
+    font-size: 0.9rem;
+  }
+}
 
+/* Orientación horizontal */
+@media (max-height: 500px) and (orientation: landscape) {
+  .inicio {
+    height: auto;
+    padding: 60px 20px;
+  }
+  
+  .save-the-date {
+    height: auto;
+    padding: 60px 20px;
+  }
+  
+  .inicio h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  
+  .inicio .fecha {
+    margin-bottom: 20px;
+  }
+  
+  .contador {
+    margin-top: 30px;
+  }
+}
+
+/* Ajustes específicos para iPhone 5/SE */
+@media (max-width: 320px) {
+  .inicio h1 {
+    font-size: 1.8rem;
+  }
+  
+  .cuadro {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .cuadro div {
+    font-size: 1.5rem;
+  }
+  
+  .cuadro span {
+    font-size: 0.6rem;
+  }
+  
+  .confirmacion-container .titulo {
+    font-size: 1.8rem;
+  }
 }
