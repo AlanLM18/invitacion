@@ -36,11 +36,11 @@
 
             <!-- Tarjeta de la recepción -->
             <div class="tarjeta">
-                <img src="image/salon.png" alt="Recepción">
+                <img src="image/salon.jpg" alt="Recepción">
                 <h3><i class="fas fa-glass-cheers"></i> Recepción</h3>
                 <p>Salón Familiar, La Loma</p>
-                <p><i class="far fa-clock"></i> 7:30 PM</p>
-                <a href="https://maps.app.goo.gl/f7q2royUKYyE9e6u9" target="_blank" class="boton-maps">
+                <p><i class="far fa-clock"></i> 2:30 PM</p>
+                <a href="https://maps.app.goo.gl/1EvUGbisg2zDakmy9" target="_blank" class="boton-maps">
                     <i class="fas fa-map-marker-alt"></i> Ver ubicación
                 </a>
             </div>
@@ -58,7 +58,7 @@
         <!-- Padres de la Novia -->
         <div class="familia">
             <img src="image/flor.jpg" alt="Decoración floral" class="icono">
-            <p class="nombres">Eufrosina Darela López <br>&<br> Francisco Javier Ramírez Reyes ✝</p>
+            <p class="nombres">Eufrosina Barela López <br>&<br> Francisco Javier Ramírez Reyes ✝</p>
             <p class="subtitulo">Papás de la Novia</p>
         </div>
 
@@ -165,7 +165,7 @@
                         </div>
                         <h2 class="titulo-evento">Fin de la fiesta</h2>
                         <div class="detalles-evento">
-                            <p class="actividad">Hasta que la ultima persona se valla...</p>
+                            <p class="actividad">La noche no termina hasta que el último en pie se marche...</p>
                             <p class="hora">... hrs</p>
                             <p class="lugar">Salón Familiar, La Loma</p>
                         </div>
@@ -244,49 +244,67 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="decoracion"></div>
 </section>
 
-
 <script>
- document.addEventListener('DOMContentLoaded', function() {
-        const btnConfirmar = document.getElementById('btnConfirmar');
-        const mensajeInput = document.getElementById('mensaje');
-        const mensajesContainer = document.getElementById('mensajes-container');
+document.addEventListener('DOMContentLoaded', function() {
+    const btnConfirmar = document.getElementById('btnConfirmar');
+    const mensajeInput = document.getElementById('mensaje');
+    const mensajesContainer = document.getElementById('mensajes-container');
 
-        btnConfirmar.addEventListener('click', function() {
-            const mensaje = mensajeInput.value.trim();
-            
-            if (mensaje === '') {
-                alert('Por favor, escribe un mensaje antes de confirmar');
-                return;
-            }
+    // Cargar mensajes almacenados en LocalStorage al cargar la página
+    function cargarMensajes() {
+        const mensajesGuardados = JSON.parse(localStorage.getItem('mensajes')) || [];
+        mensajesContainer.innerHTML = ''; // Limpiar contenedor antes de renderizar
 
-            // Mostrar el contenedor de mensajes
-            mensajesContainer.style.display = 'block';
-            
-            // Crear el mensaje del usuario
+        mensajesGuardados.forEach(msg => {
             const mensajeDiv = document.createElement('div');
             mensajeDiv.className = 'mensaje-usuario';
             mensajeDiv.innerHTML = `
-                <p>${mensaje}</p>
-                <span class="fecha">${new Date().toLocaleDateString('es-MX', { 
-                    day: 'numeric', 
-                    month: 'long', 
-                    year: 'numeric' 
-                })}</span>
+                <p>${msg.texto}</p>
+                <span class="fecha">${msg.fecha}</span>
             `;
-            
-            // Limpiar mensajes anteriores y añadir el nuevo
-            mensajesContainer.innerHTML = '';
             mensajesContainer.appendChild(mensajeDiv);
-            
-            // Limpiar el textarea
-            mensajeInput.value = '';
-            
-            // Desplazarse suavemente a los mensajes
-            setTimeout(() => {
-                mensajesContainer.scrollIntoView({ behavior: 'smooth' });
-            }, 300);
         });
+
+        if (mensajesGuardados.length > 0) {
+            mensajesContainer.style.display = 'block';
+        }
+    }
+
+    cargarMensajes(); // Llamar a la función al inicio
+
+    btnConfirmar.addEventListener('click', function() {
+        const mensaje = mensajeInput.value.trim();
+        
+        if (mensaje === '') {
+            alert('Por favor, escribe un mensaje antes de confirmar');
+            return;
+        }
+
+        const fecha = new Date().toLocaleDateString('es-MX', { 
+            day: 'numeric', 
+            month: 'long', 
+            year: 'numeric' 
+        });
+
+        const nuevoMensaje = { texto: mensaje, fecha };
+
+        // Obtener mensajes existentes y agregar el nuevo
+        const mensajesGuardados = JSON.parse(localStorage.getItem('mensajes')) || [];
+        mensajesGuardados.push(nuevoMensaje);
+        localStorage.setItem('mensajes', JSON.stringify(mensajesGuardados));
+
+        // Recargar mensajes en la página
+        cargarMensajes();
+
+        // Limpiar el textarea
+        mensajeInput.value = '';
+
+        // Desplazarse suavemente a los mensajes
+        setTimeout(() => {
+            mensajesContainer.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
     });
+});
 </script>
 
 
