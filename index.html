@@ -165,7 +165,7 @@
                         </div>
                         <h2 class="titulo-evento">Fin de la fiesta</h2>
                         <div class="detalles-evento">
-                            <p class="actividad">La noche no termina hasta que el último en pie se marche...</p>
+                            <p class="actividad">La noche no termina hasta que el último en pie se marche.</p>
                             <p class="hora">... hrs</p>
                             <p class="lugar">Salón Familiar, La Loma</p>
                         </div>
@@ -244,34 +244,52 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="decoracion"></div>
 </section>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js"></script>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    // Configuración de Firebase (usa tus propios datos desde Firebase Console)
+    const firebaseConfig = {
+        apiKey: "TU_API_KEY",
+        authDomain: "TU_DOMINIO.firebaseapp.com",
+        databaseURL: "https://TU_PROYECTO.firebaseio.com",
+        projectId: "TU_PROYECTO",
+        storageBucket: "TU_PROYECTO.appspot.com",
+        messagingSenderId: "TU_ID",
+        appId: "TU_APP_ID"
+    };
+
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
     const btnConfirmar = document.getElementById('btnConfirmar');
     const mensajeInput = document.getElementById('mensaje');
     const mensajesContainer = document.getElementById('mensajes-container');
 
-    // Cargar mensajes almacenados en LocalStorage al cargar la página
+    // Cargar mensajes desde Firebase en tiempo real
     function cargarMensajes() {
-        const mensajesGuardados = JSON.parse(localStorage.getItem('mensajes')) || [];
-        mensajesContainer.innerHTML = ''; // Limpiar contenedor antes de renderizar
+        database.ref('mensajes').on('value', function(snapshot) {
+            mensajesContainer.innerHTML = ''; // Limpiar antes de agregar nuevos mensajes
+            snapshot.forEach(function(childSnapshot) {
+                const data = childSnapshot.val();
+                const mensajeDiv = document.createElement('div');
+                mensajeDiv.className = 'mensaje-usuario';
+                mensajeDiv.innerHTML = `
+                    <p>${data.texto}</p>
+                    <span class="fecha">${data.fecha}</span>
+                `;
+                mensajesContainer.appendChild(mensajeDiv);
+            });
 
-        mensajesGuardados.forEach(msg => {
-            const mensajeDiv = document.createElement('div');
-            mensajeDiv.className = 'mensaje-usuario';
-            mensajeDiv.innerHTML = `
-                <p>${msg.texto}</p>
-                <span class="fecha">${msg.fecha}</span>
-            `;
-            mensajesContainer.appendChild(mensajeDiv);
+            if (snapshot.exists()) {
+                mensajesContainer.style.display = 'block';
+            }
         });
-
-        if (mensajesGuardados.length > 0) {
-            mensajesContainer.style.display = 'block';
-        }
     }
 
-    cargarMensajes(); // Llamar a la función al inicio
-
+    // Agregar mensaje al confirmar asistencia
     btnConfirmar.addEventListener('click', function() {
         const mensaje = mensajeInput.value.trim();
         
@@ -286,15 +304,8 @@ document.addEventListener('DOMContentLoaded', function() {
             year: 'numeric' 
         });
 
-        const nuevoMensaje = { texto: mensaje, fecha };
-
-        // Obtener mensajes existentes y agregar el nuevo
-        const mensajesGuardados = JSON.parse(localStorage.getItem('mensajes')) || [];
-        mensajesGuardados.push(nuevoMensaje);
-        localStorage.setItem('mensajes', JSON.stringify(mensajesGuardados));
-
-        // Recargar mensajes en la página
-        cargarMensajes();
+        // Guardar en Firebase
+        database.ref('mensajes').push({ texto: mensaje, fecha });
 
         // Limpiar el textarea
         mensajeInput.value = '';
@@ -304,7 +315,9 @@ document.addEventListener('DOMContentLoaded', function() {
             mensajesContainer.scrollIntoView({ behavior: 'smooth' });
         }, 300);
     });
-});
+
+    // Cargar mensajes al abrir la página
+    cargarMensajes();
 </script>
 
 
