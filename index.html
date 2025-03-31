@@ -244,83 +244,132 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="decoracion"></div>
 </section>
 
-<!-- Agregar Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"></script>
-
+<script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 <script>
-    // 🔥 Configuración de Firebase (Reemplaza con tus datos)
-    const firebaseConfig = {
-    apiKey: "AIzaSyA4786bdzjkSU16kHNQuvRD6o6TbpMMjKE",
-    authDomain: "invited-aaf48.firebaseapp.com",
-    databaseURL: "https://invited-aaf48-default-rtdb.firebaseio.com",
-    projectId: "invited-aaf48",
-    storageBucket: "invited-aaf48.firebasestorage.app",
-    messagingSenderId: "35317551800",
-    appId: "1:35317551800:web:2ac59bbb7da134a8685a4d",
-    measurementId: "G-YQLGRJS8MZ"
-    };
-
-    // 🔥 Inicializar Firebase
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-
-    // 📌 Código para manejar los mensajes
     document.addEventListener('DOMContentLoaded', function() {
         const btnConfirmar = document.getElementById('btnConfirmar');
         const mensajeInput = document.getElementById('mensaje');
         const mensajesContainer = document.getElementById('mensajes-container');
-
-        // 🔄 Función para cargar los mensajes en tiempo real
-        function cargarMensajes() {
-            database.ref('mensajes').on('value', (snapshot) => {
-                mensajesContainer.innerHTML = ''; // Limpiar antes de renderizar
-
-                snapshot.forEach((childSnapshot) => {
-                    const msg = childSnapshot.val();
-                    const mensajeDiv = document.createElement('div');
-                    mensajeDiv.className = 'mensaje-usuario';
-                    mensajeDiv.innerHTML = `
-                        <p>${msg.texto}</p>
-                        <span class="fecha">${msg.fecha}</span>
-                    `;
-                    mensajesContainer.appendChild(mensajeDiv);
-                });
-
-                if (snapshot.exists()) {
-                    mensajesContainer.style.display = 'block';
-                }
+    
+        const peer = new Peer(); // Crear una conexión P2P
+        let conn; 
+    
+        peer.on('open', (id) => {
+            console.log(`Tu ID de Peer: ${id}`);
+        });
+    
+        peer.on('connection', (connection) => {
+            conn = connection;
+            conn.on('data', (mensaje) => {
+                mostrarMensaje(mensaje);
             });
+        });
+    
+        function mostrarMensaje(mensaje) {
+            const mensajeDiv = document.createElement('div');
+            mensajeDiv.className = 'mensaje-usuario';
+            mensajeDiv.innerHTML = `<p>${mensaje.texto}</p> <span class="fecha">${mensaje.fecha}</span>`;
+            mensajesContainer.appendChild(mensajeDiv);
         }
-
-        cargarMensajes(); // Llamar a la función al inicio
-
-        // 📩 Guardar mensaje en Firebase al hacer clic en el botón
+    
         btnConfirmar.addEventListener('click', function() {
             const mensaje = mensajeInput.value.trim();
-            
             if (mensaje === '') {
                 alert('Por favor, escribe un mensaje antes de confirmar');
                 return;
             }
-
+    
             const fecha = new Date().toLocaleDateString('es-MX', { 
                 day: 'numeric', 
                 month: 'long', 
                 year: 'numeric' 
             });
-
+    
             const nuevoMensaje = { texto: mensaje, fecha };
-
-            // Enviar mensaje a Firebase
-            database.ref('mensajes').push(nuevoMensaje);
-
-            // Limpiar el textarea
+    
+            if (conn) {
+                conn.send(nuevoMensaje);
+            }
+    
+            mostrarMensaje(nuevoMensaje);
             mensajeInput.value = '';
         });
+    
+        function conectarConOtroPeer(idOtroPeer) {
+            conn = peer.connect(idOtroPeer);
+            conn.on('open', () => {
+                console.log(`Conectado con: ${idOtroPeer}`);
+            });
+    
+            conn.on('data', (mensaje) => {
+                mostrarMensaje(mensaje);
+            });
+        }
     });
-</script>
+    </script>
+    
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btnConfirmar = document.getElementById('btnConfirmar');
+    const mensajeInput = document.getElementById('mensaje');
+    const mensajesContainer = document.getElementById('mensajes-container');
 
+    // Cargar mensajes almacenados en LocalStorage al cargar la página
+    function cargarMensajes() {
+        const mensajesGuardados = JSON.parse(localStorage.getItem('mensajes')) || [];
+        mensajesContainer.innerHTML = ''; // Limpiar contenedor antes de renderizar
+
+        mensajesGuardados.forEach(msg => {
+            const mensajeDiv = document.createElement('div');
+            mensajeDiv.className = 'mensaje-usuario';
+            mensajeDiv.innerHTML = `
+                <p>${msg.texto}</p>
+                <span class="fecha">${msg.fecha}</span>
+            `;
+            mensajesContainer.appendChild(mensajeDiv);
+        });
+
+        if (mensajesGuardados.length > 0) {
+            mensajesContainer.style.display = 'block';
+        }
+    }
+
+    cargarMensajes(); // Llamar a la función al inicio
+
+    btnConfirmar.addEventListener('click', function() {
+        const mensaje = mensajeInput.value.trim();
+        
+        if (mensaje === '') {
+            alert('Por favor, escribe un mensaje antes de confirmar');
+            return;
+        }
+
+        const fecha = new Date().toLocaleDateString('es-MX', { 
+            day: 'numeric', 
+            month: 'long', 
+            year: 'numeric' 
+        });
+
+        const nuevoMensaje = { texto: mensaje, fecha };
+
+        // Obtener mensajes existentes y agregar el nuevo
+        const mensajesGuardados = JSON.parse(localStorage.getItem('mensajes')) || [];
+        mensajesGuardados.push(nuevoMensaje);
+        localStorage.setItem('mensajes', JSON.stringify(mensajesGuardados));
+
+        // Recargar mensajes en la página
+        cargarMensajes();
+
+        // Limpiar el textarea
+        mensajeInput.value = '';
+
+        // Desplazarse suavemente a los mensajes
+        setTimeout(() => {
+            mensajesContainer.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    });
+});
+</script>
 
 
 <section class="confirmacion-container">
