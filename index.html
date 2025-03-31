@@ -244,81 +244,72 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="decoracion"></div>
 </section>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js"></script>
+<!-- Agregar Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
 
 <script>
-    // Configuración de Firebase (usa tus propios datos desde Firebase Console)
+    // Configuración de Firebase (reemplaza con tus datos)
     const firebaseConfig = {
-        apiKey: "TU_API_KEY",
-        authDomain: "TU_DOMINIO.firebaseapp.com",
-        databaseURL: "https://TU_PROYECTO.firebaseio.com",
-        projectId: "TU_PROYECTO",
-        storageBucket: "TU_PROYECTO.appspot.com",
-        messagingSenderId: "TU_ID",
-        appId: "TU_APP_ID"
+        apiKey: "AIzaSyD2BWRVzhAMrGezmPt333gGdd5LqnZzUyI",
+        authDomain: "invitacion-c9bbe.firebaseapp.com",
+        projectId: "invitacion-c9bbe",
+        storageBucket: "invitacion-c9bbe.firebasestorage.app",
+        messagingSenderId: "675478286606",
+        appId: "1:675478286606:web:aebaa815e0e917ae0a275f",
+        measurementId: "G-PRHDLMHWGP"
     };
 
     // Inicializar Firebase
     firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
+    const db = firebase.firestore();
 
-    const btnConfirmar = document.getElementById('btnConfirmar');
-    const mensajeInput = document.getElementById('mensaje');
-    const mensajesContainer = document.getElementById('mensajes-container');
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnConfirmar = document.getElementById('btnConfirmar');
+        const mensajeInput = document.getElementById('mensaje');
+        const mensajesContainer = document.getElementById('mensajes-container');
 
-    // Cargar mensajes desde Firebase en tiempo real
-    function cargarMensajes() {
-        database.ref('mensajes').on('value', function(snapshot) {
-            mensajesContainer.innerHTML = ''; // Limpiar antes de agregar nuevos mensajes
-            snapshot.forEach(function(childSnapshot) {
-                const data = childSnapshot.val();
+        // Cargar mensajes en tiempo real desde Firestore
+        db.collection("mensajes").orderBy("fecha").onSnapshot(snapshot => {
+            mensajesContainer.innerHTML = ''; // Limpiar contenedor antes de cargar
+            snapshot.forEach(doc => {
+                const mensaje = doc.data();
                 const mensajeDiv = document.createElement('div');
                 mensajeDiv.className = 'mensaje-usuario';
-                mensajeDiv.innerHTML = `
-                    <p>${data.texto}</p>
-                    <span class="fecha">${data.fecha}</span>
-                `;
+                mensajeDiv.innerHTML = `<p>${mensaje.texto}</p><span class="fecha">${mensaje.fecha}</span>`;
                 mensajesContainer.appendChild(mensajeDiv);
             });
+        });
 
-            if (snapshot.exists()) {
-                mensajesContainer.style.display = 'block';
+        btnConfirmar.addEventListener('click', function() {
+            const mensaje = mensajeInput.value.trim();
+            if (mensaje === '') {
+                alert('Por favor, escribe un mensaje antes de confirmar');
+                return;
             }
+
+            const fecha = new Date().toLocaleDateString('es-MX', { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric' 
+            });
+
+            // Guardar mensaje en Firestore
+            db.collection("mensajes").add({
+                texto: mensaje,
+                fecha: fecha
+            })
+            .then(() => {
+                console.log("Mensaje guardado");
+                mensajeInput.value = ''; // Limpiar el textarea
+            })
+            .catch(error => {
+                console.error("Error al guardar mensaje:", error);
+            });
         });
-    }
-
-    // Agregar mensaje al confirmar asistencia
-    btnConfirmar.addEventListener('click', function() {
-        const mensaje = mensajeInput.value.trim();
-        
-        if (mensaje === '') {
-            alert('Por favor, escribe un mensaje antes de confirmar');
-            return;
-        }
-
-        const fecha = new Date().toLocaleDateString('es-MX', { 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric' 
-        });
-
-        // Guardar en Firebase
-        database.ref('mensajes').push({ texto: mensaje, fecha });
-
-        // Limpiar el textarea
-        mensajeInput.value = '';
-
-        // Desplazarse suavemente a los mensajes
-        setTimeout(() => {
-            mensajesContainer.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
     });
-
-    // Cargar mensajes al abrir la página
-    cargarMensajes();
 </script>
+
 
 
 
