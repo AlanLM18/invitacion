@@ -1823,3 +1823,142 @@ h1, h2, h3 {
     font-size: 1.8rem;
   }
 }
+
+/* Ajustes para Padres & Padrinos en móviles */
+@media (max-width: 768px) {
+  #padres-padrinos .contenedor {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .familia, .padrinos {
+    width: 90%;
+    max-width: 320px;
+    padding: 30px 20px;
+    margin-bottom: 0;
+  }
+  
+  .icono {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+  }
+  
+  .nombres {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .subtitulo {
+    font-size: 0.9rem;
+  }
+  
+  #padres-padrinos .titulo {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+  }
+}
+
+/* Ajustes para Save the Date en móviles */
+@media (max-width: 768px) {
+  .save-the-date .titulo {
+    font-size: 3.5rem;
+    white-space: nowrap;
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+  
+  .save-the-date .frase {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    padding: 0 15px;
+  }
+  
+  .contador {
+    flex-wrap: nowrap;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+    padding: 0 10px;
+  }
+  
+  .cuadro {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    animation: none;
+  }
+  
+  .cuadro div {
+    font-size: 1.8rem;
+  }
+  
+  .cuadro span {
+    font-size: 0.7rem;
+  }
+}
+
+/* Ajustes para el formulario de confirmación en móviles */
+@media (max-width: 768px) {
+  #confirmacion .titulo {
+    font-size: 2.5rem;
+  }
+  
+  #confirmacion .descripcion {
+    font-size: 1rem;
+    padding: 0 15px;
+  }
+  
+  .formulario {
+    width: 90%;
+    padding: 30px 20px;
+  }
+  
+  .formulario textarea {
+    height: 120px;
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .formulario button {
+    padding: 14px 30px;
+    font-size: 1rem;
+  }
+  
+  .decoracion {
+    margin: 30px auto;
+  }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .save-the-date .titulo {
+    font-size: 2.8rem;
+  }
+  
+  .cuadro {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+  }
+  
+  .cuadro div {
+    font-size: 1.5rem;
+  }
+  
+  .cuadro span {
+    font-size: 0.6rem;
+  }
+  
+  #padres-padrinos .titulo {
+    font-size: 2.5rem;
+  }
+  
+  .familia, .padrinos {
+    width: 95%;
+    max-width: 280px;
+    padding: 25px 15px;
+  }
+}
