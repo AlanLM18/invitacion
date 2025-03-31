@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/your-fontawesome-key.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Página de inicio -->
+    <section class="inicio">
+        <h1>Elizabeth y Audel</h1>
+        <p class="fecha">12/07/2025</p>
+        <audio controls>
+            <source src="music/Perfect.mp3" type="audio/mp3">
+            Tu navegador no soporta el audio.
+        </audio>
+    </section>
+
+    <!-- Ubicaciones -->
+    <section class="ubicaciones">
+        <h2>Ubicaciones</h2>
+        <div class="tarjetas">
+            <!-- Tarjeta de la ceremonia -->
+            <div class="tarjeta">
+                <img src="image/iglesia.jpg" alt="Ceremonia">
+                <h3><i class="fas fa-church"></i> Ceremonia</h3>
+                <p>Parroquia Nuestra  Señora  del Carmen, La loma México</p>
+                <p><i class="far fa-clock"></i> 1:00 PM</p>
+                <a href="https://www.google.com/maps?q=Iglesia+de+la+Virgen+del+Carmen,+Manzana+001,+50355+La+Loma,+Méx." target="_blank" class="boton-maps">
+                    <i class="fas fa-map-marker-alt"></i> Ver ubicación
+                </a>
+            </div>
+
+            <!-- Tarjeta de la recepción -->
+            <div class="tarjeta">
+                <img src="image/salon.png" alt="Recepción">
+                <h3><i class="fas fa-glass-cheers"></i> Recepción</h3>
+                <p>Salón Familiar, La Loma</p>
+                <p><i class="far fa-clock"></i> 7:30 PM</p>
+                <a href="https://maps.app.goo.gl/f7q2royUKYyE9e6u9" target="_blank" class="boton-maps">
+                    <i class="fas fa-map-marker-alt"></i> Ver ubicación
+                </a>
+            </div>
+        </div>
+    </section>
+
+  <!-- Sección Padres & Padrinos -->
+  <section id="padres-padrinos">
+    <h2 class="titulo">Padres & Padrinos</h2>
+    <p class="descripcion">
+        Han sido parte de nuestra historia y hoy celebramos este día con gratitud por su amor y apoyo.
+    </p>
+
+    <div class="contenedor">
+        <!-- Padres de la Novia -->
+        <div class="familia">
+            <img src="image/flor.jpg" alt="Decoración floral" class="icono">
+            <p class="nombres">Eufrosina Darela López <br>&<br> Francisco Javier Ramírez Reyes ✝</p>
+            <p class="subtitulo">Papás de la Novia</p>
+        </div>
+
+        <!-- Padres del Novio con ícono de cruz -->
+        <div class="familia">
+            <img src="image/flor.jpg" alt="Icono de cruz" class="icono">
+            <p class="nombres">Rebeca Ruiz Quintana ✝ <br>&<br> Mario Perez Gracia ✝</p>
+            <p class="subtitulo">Papás del Novio</p>
+        </div>
+
+        <!-- Padrinos de Velación -->
+        <div class="padrinos">
+            <img src="image/hoja.jpg" alt="Decoración de hojas" class="icono">
+            <p class="nombres">Maira Ugalde González <br>&<br> Jesús Ruiz Quintana</p>
+            <p class="subtitulo">Padrinos de Velación</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Sección Save the Date -->
+<section class="save-the-date">
+    <h2 class="titulo">Save The Date</h2>
+    <p class="frase">Uniremos nuestras vidas en matrimonio y queremos compartir este momento tan especial con ustedes.</p>
+    
+    <!-- Contador en cuadros -->
+    <div class="contador">
+        <div class="cuadro">
+            <div id="dias">00</div>
+            <span>DÍAS</span>
+        </div>
+        <div class="cuadro">
+            <div id="horas">00</div>
+            <span>HRS</span>
+        </div>
+        <div class="cuadro">
+            <div id="minutos">00</div>
+            <span>MIN</span>
+        </div>
+        <div class="cuadro">
+            <div id="segundos">00</div>
+            <span>SEC</span>
+        </div>
+    </div>
+</section>
+
+<!-- Sección Itinerario -->
+<section id="itinerario-animado">
+    <h1 class="titulo-principal">Itinerario</h1>
+    
+    <div class="linea-tiempo-container">
+        <!-- Línea central -->
+        <div class="linea-central"></div>
+        
+        <!-- Ceremonia Religiosa (Izquierda) -->
+        <div class="evento izquierda">
+            <div class="tarjeta-evento">
+                <div class="icono-animado">
+                    <img src="image/ceremonia.jpg" alt="Ceremonia Religiosa">
+                </div>
+                <h2 class="titulo-evento">Ceremonia Religiosa</h2>
+                <div class="detalles-evento">
+                    <p class="actividad">Misa</p>
+                    <p class="hora">13:00 hrs</p>
+                    <p class="lugar">Parroquia Nuestra Señora del Carmen</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recepción (Derecha) -->
+        <div class="evento derecha">
+            <div class="tarjeta-evento">
+                <div class="icono-animado">
+                    <img src="image/recepcion.png" alt="Recepción">
+                </div>
+                <h2 class="titulo-evento">Recepción</h2>
+                <div class="detalles-evento">
+                    <p class="actividad">Comida</p>
+                    <p class="hora">14:30 hrs</p>
+                    <p class="lugar">Salón Familiar, La Loma</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ceremonia Civil (Izquierda) -->
+        <div class="evento izquierda">
+            <div class="tarjeta-evento">
+                <div class="icono-animado">
+                    <img src="image/baile2.jpeg" alt="Ceremonia Civil">
+                </div>
+                <h2 class="titulo-evento">Baile</h2>
+                <div class="detalles-evento">
+                    <p class="actividad">Baile hasta donde el cuerpo aguante</p>
+                    <p class="hora">17:00 hrs</p>
+                    <p class="lugar">Salón Familiar, La Loma</p>
+                </div>
+            </div>
+        </div>
+                <!-- Recepción (Derecha) -->
+                <div class="evento derecha">
+                    <div class="tarjeta-evento">
+                        <div class="icono-animado">
+                            <img src="image/fin.jpg" alt="Recepción">
+                        </div>
+                        <h2 class="titulo-evento">Fin de la fiesta</h2>
+                        <div class="detalles-evento">
+                            <p class="actividad">Hasta que la ultima persona se valla...</p>
+                            <p class="hora">... hrs</p>
+                            <p class="lugar">Salón Familiar, La Loma</p>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</section>
+
+
+<script>
+   // Activar animaciones al hacer scroll
+document.addEventListener('DOMContentLoaded', function() {
+    const eventos = document.querySelectorAll('.evento');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    eventos.forEach(evento => {
+        observer.observe(evento);
+    });
+});
+</script>
+
+<section id="dress-code">
+    <h2 class="titulo">Dress Code</h2>
+    <p class="subtitulo">Color Rojo, Beige y Cafe reservado para los novios</p>
+
+    <div class="contenedor">
+        <!-- Dress Code Hombre -->
+        <div class="card">
+            <div class="overlay"></div>
+            <img src="image/hombre.jpeg" alt="Dress Code Hombre">
+            <div class="texto">
+                <p>– DRESS CODE HOMBRE –</p>
+                <h3>FORMAL</h3>
+            </div>
+            <div class="animacion"></div>
+        </div>
+
+        <!-- Dress Code Mujer -->
+        <div class="card">
+            <div class="overlay"></div>
+            <img src="image/mujer1.png" alt="Dress Code Mujer">
+            <div class="texto">
+                <p>– DRESS CODE MUJER –</p>
+                <h3>FORMAL</h3>
+            </div>
+            <div class="animacion"></div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Sección Confirmación de Asistencia -->
+<section id="confirmacion">
+    <div class="decoracion"></div>
+    <h2 class="titulo">Confirmación de Asistencia</h2>
+    <p class="descripcion">Déjanos un mensaje para confirmar tu asistencia.</p>
+
+    <div class="formulario">
+        <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
+        <button id="btnConfirmar">Confirmar Asistencia</button>
+    </div>
+
+    <div id="mensajes-container">
+        <!-- Aquí aparecerán los mensajes -->
+    </div>
+    <div class="decoracion"></div>
+</section>
+
+
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+        const btnConfirmar = document.getElementById('btnConfirmar');
+        const mensajeInput = document.getElementById('mensaje');
+        const mensajesContainer = document.getElementById('mensajes-container');
+
+        btnConfirmar.addEventListener('click', function() {
+            const mensaje = mensajeInput.value.trim();
+            
+            if (mensaje === '') {
+                alert('Por favor, escribe un mensaje antes de confirmar');
+                return;
+            }
+
+            // Mostrar el contenedor de mensajes
+            mensajesContainer.style.display = 'block';
+            
+            // Crear el mensaje del usuario
+            const mensajeDiv = document.createElement('div');
+            mensajeDiv.className = 'mensaje-usuario';
+            mensajeDiv.innerHTML = `
+                <p>${mensaje}</p>
+                <span class="fecha">${new Date().toLocaleDateString('es-MX', { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric' 
+                })}</span>
+            `;
+            
+            // Limpiar mensajes anteriores y añadir el nuevo
+            mensajesContainer.innerHTML = '';
+            mensajesContainer.appendChild(mensajeDiv);
+            
+            // Limpiar el textarea
+            mensajeInput.value = '';
+            
+            // Desplazarse suavemente a los mensajes
+            setTimeout(() => {
+                mensajesContainer.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        });
+    });
+</script>
+
+
+<section class="confirmacion-container">
+    <!-- Decoración superior -->
+    <div class="decoracion-superior">✧ ✦ ✧</div>
+
+    <!-- Texto de confirmación -->
+    <h2 class="titulo">– CONFIRMAR ASISTENCIA –</h2>
+
+    <!-- Botón de confirmación por WhatsApp -->
+    <button class="boton-whatsapp" onclick="confirmarAsistencia()">
+        📩 CONFIRMAR POR WHATSAPP
+    </button>
+
+    <!-- Línea decorativa -->
+    <div class="linea"></div>
+</section>
+
+<script>
+    function confirmarAsistencia() {
+        const numeroWhatsApp = "5535194725"; // Reemplaza con el número real
+        const mensaje = encodeURIComponent("Hola, confirmo mi asistencia a la boda. ¡Nos vemos pronto! 🎉");
+        window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, "_blank");
+    }
+</script>
+
+<script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            const animacion = card.querySelector('.animacion');
+            
+            // Crear partículas de efecto
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = `${Math.random() * 4 + 2}px`;
+                particle.style.height = particle.style.width;
+                particle.style.backgroundColor = `rgba(255, 255, 255, ${Math.random() * 0.7 + 0.3})`;
+                particle.style.borderRadius = '50%';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.opacity = '0';
+                particle.style.transition = 'all 1s ease-out';
+                particle.style.transform = 'scale(0)';
+                
+                animacion.appendChild(particle);
+                
+                // Efecto al pasar el mouse
+                card.addEventListener('mouseenter', () => {
+                    particle.style.opacity = '1';
+                    particle.style.transform = 'scale(1)';
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    particle.style.opacity = '0';
+                    particle.style.transform = 'scale(0)';
+                });
+            }
+        });
+    });
+</script> 
+
+
+
+<script>
+    function countdown() {
+        const weddingDate = new Date("2025-07-12T13:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const difference = weddingDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("dias").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("horas").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutos").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("segundos").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
+    }
+    countdown();
+</script>
+
+
+
+</body>
+</html>
