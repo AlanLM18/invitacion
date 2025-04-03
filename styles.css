@@ -1269,6 +1269,33 @@ h1, h2, h3 {
   z-index: 1;
   overflow: hidden;
 }
+/* Estilo para resaltar en negrita sin cambiar color */
+.subtitulo strong {
+    font-weight: 700; /* Negrita pero manteniendo el color original */
+    /* Opcional: puedes añadir un pequeño realce */
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+/* El resto de tu CSS se mantiene igual */
+.subtitulo {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #555; /* Este es el color que ya tenías */
+}
+
+#dress-code {
+    padding: 4rem 2rem;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.titulo {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+/* ... otros estilos que ya tenías ... */
 
 @keyframes cardEntrance {
   from {
